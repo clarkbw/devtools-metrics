@@ -18,13 +18,14 @@ requirejs.config({
 });
 
 define('FIREFOX_RELEASES', [], function() {
+  var TOO_OLD = new Date('2013-12-31');
   return FIREFOX_RELEASES.map(function(d) {
     d['date'] = new Date(d['date']);
     d['label'] = 'release ' + d['version'];
     return d;
   })
   .filter(function(d) {
-      return d['date'] > new Date('2013-12-31');
+      return d['date'] > TOO_OLD;
   });
 });
 
