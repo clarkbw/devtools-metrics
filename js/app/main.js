@@ -9,6 +9,7 @@ define('app/main', ['moment', 'TelemetryPromises'], function(moment, TelemetryPr
   TelemetryPromises.init().then(() => {
     requirejs(['app/toolbox-active-time']);
     requirejs(['app/toolbox-opened']);
+    requirejs(['app/panels-opened']);
     requirejs(['app/empty-graphs']);
   });
 

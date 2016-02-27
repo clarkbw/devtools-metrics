@@ -48,7 +48,7 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
               yax_format: function(d) {
                 return moment.duration(d, 'minutes').humanize();
               },
-              markers: FIREFOX_RELEASES,
+              markers: FIREFOX_RELEASES.beta,
               y_extended_ticks: true,
               // y_scale_type: 'log',
               color_accessor: 'channel',

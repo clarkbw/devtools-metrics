@@ -41,7 +41,7 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
             animate_on_load: true,
             target: '#' + ID,
             y_extended_ticks: true,
-            markers: FIREFOX_RELEASES,
+            markers: FIREFOX_RELEASES.beta,
             x_accessor: 'date',
             y_accessor: 'value',
             legend: ['nightly', 'aurora', 'beta', 'release'],

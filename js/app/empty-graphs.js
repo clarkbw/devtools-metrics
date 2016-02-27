@@ -5,16 +5,6 @@ define('app/empty-graphs', ['jquery', 'MG'], function($, MG) {
   $(function() {
 
     MG.data_graphic({
-      title: 'DevTools Panel Opened',
-      chart_type: 'missing-data',
-      width: 515,
-      height: 320,
-      left: 60,
-      animate_on_load: true,
-      target: '#devtools-toolbox-panel-opened-chart'
-    });
-
-    MG.data_graphic({
       title: 'DevTools Panel Time Active',
       chart_type: 'missing-data',
       width: 515,
@@ -37,23 +27,23 @@ define('app/empty-graphs', ['jquery', 'MG'], function($, MG) {
       });
     });
 
-    MG.data_graphic({
-      chart_type: 'missing-data',
-      width: 515,
-      height: 320,
-      left: 60,
-      animate_on_load: true,
-      target: '#devtools-devedition-mau-chart'
-    });
-
-    MG.data_graphic({
-      chart_type: 'missing-data',
-      width: 515,
-      height: 320,
-      left: 60,
-      animate_on_load: true,
-      target: '#devtools-devedition-dau-chart'
-    });
+    // MG.data_graphic({
+    //   chart_type: 'missing-data',
+    //   width: 515,
+    //   height: 320,
+    //   left: 60,
+    //   animate_on_load: true,
+    //   target: '#devtools-devedition-mau-chart'
+    // });
+    //
+    // MG.data_graphic({
+    //   chart_type: 'missing-data',
+    //   width: 515,
+    //   height: 320,
+    //   left: 60,
+    //   animate_on_load: true,
+    //   target: '#devtools-devedition-dau-chart'
+    // });
   }); // end $()
 
 }); // end define

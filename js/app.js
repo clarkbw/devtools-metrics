@@ -19,7 +19,7 @@ requirejs.config({
 
 define('FIREFOX_RELEASES', [], function() {
   var TOO_OLD = new Date('2013-12-31');
-  return FIREFOX_RELEASES.map(function(d) {
+  FIREFOX_RELEASES = FIREFOX_RELEASES.map(function(d) {
     d['date'] = new Date(d['date']);
     d['label'] = 'release ' + d['version'];
     return d;
@@ -27,6 +27,33 @@ define('FIREFOX_RELEASES', [], function() {
   .filter(function(d) {
       return d['date'] > TOO_OLD;
   });
+  return {
+    release: FIREFOX_RELEASES,
+    beta: FIREFOX_RELEASES.map((release) => {
+      var version = parseInt(release.version, 10) + 1;
+      return {
+        version: version,
+        date: release.date,
+        label: 'beta ' + version
+      };
+    }),
+    aurora: FIREFOX_RELEASES.map((release) => {
+      var version = parseInt(release.version, 10) + 2;
+      return {
+        version: version,
+        date: release.date,
+        label: 'DevEdition ' + version
+      };
+    }),
+    nightly: FIREFOX_RELEASES.map((release) => {
+      var version = parseInt(release.version, 10) + 3;
+      return {
+        version: version,
+        date: release.date,
+        label: 'nightly ' + version
+      };
+    })
+  };
 });
 
 // Load the main app module to start the app

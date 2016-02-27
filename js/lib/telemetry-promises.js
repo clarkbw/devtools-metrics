@@ -4,16 +4,7 @@
 define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
 
   const ALL_CHANNELS = ['nightly', 'aurora', 'beta', 'release'];
-  const EARLIEST_VERSION = 24;
-
-  function FakeEvolution() { }
-  FakeEvolution.prototype.combine = function(other) {
-    return other;
-  }
-  FakeEvolution.prototype.sanitized = function() {}
-  FakeEvolution.prototype.map = function() {
-    return [];
-  }
+  const EARLIEST_VERSION = 39;
 
   return {
 
@@ -44,6 +35,9 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
      * @param {string} to.version - The version number (int) of Firefox
      */
     getVersions: function(from, to) {
+      // The function we call into is mindblowingly dumb
+      // best bet is to rewrite it from the ground up
+      // https://github.com/mozilla/telemetry-dashboard/blob/master/v2/telemetry.js
       return new Promise((resolve, reject) => {
         if (!this.isInitialized()) {
           return reject('Telemetry must be initialized with the init function');
@@ -60,8 +54,8 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
         var versions = Telemetry.getVersions([from.channel, from.version].join('/'),
                                              [to.channel, to.version].join('/'));
         var filtered = versions.map(function(version) {
-          var [c, v] = version.split('/');
-          return { channel: c, version: v };
+          var v = version.split('/'); // CHROME!!!
+          return { channel: v[0], version: v[1] };
         }).filter(function(version) {
           return (version.version >= from.version && version.version <= to.version);
         });
@@ -156,14 +150,13 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
         return this.getEvolution(channel, version, metric, options).then(function (evo) {
           return evo;
         }).catch(function () {
-          return new FakeEvolution();
+          return null;
         });
       }))
     },
 
     reduceEvolutions: function(evolutions) {
-      if (evolutions === null) { return []; }
-      return evolutions.reduce(function(prev, curr) {
+      return _.compact(evolutions).reduce(function(prev, curr) {
         return prev.combine(curr);
       });
     }
