@@ -3,6 +3,7 @@ requirejs.config({
     'paths': {
       // 'app': '../app',
       'jquery': '//code.jquery.com/jquery-1.12.0.min',
+      'lodash': '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min',
       'd3': '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3',
       'moment': '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment',
       'MG': 'lib/metricsgraphics',
