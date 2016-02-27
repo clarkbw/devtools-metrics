@@ -3,14 +3,14 @@ Public metrics for Firefox DevTools
 
 ## Information
 
-This site is built using the (https://github.com/jekyll/jekyll)[jekyll] framework because it works well with github.
+This site is built using the [jekyll](https://github.com/jekyll/jekyll) framework because it works well with github.
 
 These are the web frameworks used:
-* (https://github.com/jquery/jquery)[jquery]
-* (https://github.com/mbostock/d3)[d3]
-* (https://github.com/moment/moment)[moment]
-* (https://github.com/mozilla/metrics-graphics)[Metrics Graphics]
-* (https://github.com/mozilla/telemetry-dashboard)[Telemetry]
+* [jquery](https://github.com/jquery/jquery)
+* [d3](https://github.com/mbostock/d3)
+* [moment](https://github.com/moment/moment)
+* [Metrics Graphics](https://github.com/mozilla/metrics-graphics)
+* [Telemetry v2](https://github.com/mozilla/telemetry-dashboard/tree/master/v2)
 
 ## Development
 
