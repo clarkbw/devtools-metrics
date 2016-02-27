@@ -1,0 +1,210 @@
+---
+title: DevTools Dashboard
+---
+
+{% include header.html %}
+
+{% include navbar.html %}
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12 graph-header text-center">
+        <h4>DevTools Toolbox</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-opened-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div class="text-center" id="devtools-toolbox-opened-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-usage-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div id="devtools-toolbox-usage-chart-legend"></div>
+            <p>Over a rolling 6 months this chart shows the amount of time spent (y axis)
+              with the DevTools toolbox opened and the release.  Size of the circles indicates the
+              number of users reporting that time slot.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 graph-header text-center">
+        <h4>DevTools Panels</h4>
+      </div>
+    </div>
+
+    <!-- All Panels Compared  -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-panel-opened-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-panel-active-time-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Inspector, Console, Debugger Panels -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Inspector
+              <!-- <small class="pull-right"><button type="button" class="btn btn-link btn-xs">More &#187;</button></small> -->
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-inspector-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Console</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-console-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Debugger</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-debugger-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Network, Performance, Storage Panels -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Network
+              <!-- <small class="pull-right"><button type="button" class="btn btn-link btn-xs">More &#187;</button></small> -->
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-network-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Performance</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-performance-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>Storage</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-storage-panel-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 posts">
+            <ul>
+              {% for post in site.posts %}
+                <li>
+                  <a href="{{ post.url }}">{{ post.title }}</a>
+                  {{ post.excerpt }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>DevEdition Monthly Active Users (MAU)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-devedition-mau-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-header">
+            <h4>DevEdition Daily Active Users (DAU)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-devedition-dau-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% include footer.html %}
