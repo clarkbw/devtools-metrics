@@ -7,23 +7,25 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
   var ID = 'devtools-toolbox-usage-chart';
   var options = { sanitized: true };
 
+  function evolutionMap(channel, evolutions) {
+    // map the data into the values we need
+    // histogram, index, date
+    return evolutions.map((h, i, date) => {
+      return {
+        channel: channel,
+        value: (moment.duration(h.mean(), 'seconds').minutes()),
+        submissions: h.submissions,
+        date: date
+      };
+    });
+  }
+
   T.getTargets().then((targets) => {
 
     Promise.all(targets.map((target) =>
       T.getEvolutions(target.channel, target.versions, metric, options).
               then((evolutions) => T.reduceEvolutions(evolutions)).
-              then((evolutions) => {
-                // map the data into the values we need
-                // histogram, index, date
-                return evolutions.map((h, i, date) => {
-                  return {
-                    channel: target.channel,
-                    value: (moment.duration(h.mean(), 'seconds').minutes()),
-                    submissions: h.submissions,
-                    date: date
-                  };
-                });
-              }).
+              then((evolutions) => evolutionMap(target.channel, evolutions)).
               then(_.flatten)
     )).then(_.flatten). // flatten again because we want one big cluster of data
         then((data) => {
