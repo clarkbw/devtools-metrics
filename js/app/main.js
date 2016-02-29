@@ -10,6 +10,7 @@ define('app/main', ['moment', 'TelemetryPromises'], function(moment, TelemetryPr
     requirejs(['app/toolbox-time-active']);
     requirejs(['app/toolbox-opened']);
     requirejs(['app/panels-opened']);
+    requirejs(['app/panels-time-active']);
     requirejs(['app/empty-graphs']);
   });
 

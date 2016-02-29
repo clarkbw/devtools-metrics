@@ -4,16 +4,6 @@ define('app/empty-graphs', ['jquery', 'MG'], function($, MG) {
   // Filling in empty data for now
   $(function() {
 
-    MG.data_graphic({
-      title: 'DevTools Panel Time Active',
-      chart_type: 'missing-data',
-      width: 515,
-      height: 320,
-      left: 60,
-      animate_on_load: true,
-      target: '#devtools-toolbox-panel-active-time-chart'
-    });
-
     var panels = ['inspector', 'console', 'debugger', 'network', 'performance', 'storage'];
 
     panels.forEach((panel) => {

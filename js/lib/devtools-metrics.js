@@ -32,7 +32,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           mouseover: function(d) {
             var format = d3.format(',');
             d3.select('#' + ID + ' svg .mg-active-datapoint')
-                .text(d.point.channel + ' : ' +
+                .text(d.point[options.color_accessor] + ' : ' +
                 format(d.point.submissions) + ' active for ' +
                 moment.duration(d.point.value, 'minutes').humanize());
             }
