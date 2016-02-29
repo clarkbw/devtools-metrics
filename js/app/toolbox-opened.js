@@ -2,13 +2,13 @@
 define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
 function(moment, _, T, DevToolsMetrics) {
 
-  var metric = 'DEVTOOLS_TOOLBOX_OPENED_PER_USER_FLAG';
+  var metric = 'DEVTOOLS_TOOLBOX_OPENED_BOOLEAN';
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-opened-chart';
   var chart = {
-    title: 'DevTools Toolbox Opened',
-    description: metric,
+    title: 'DevTools User Sessions per Firefox Release Channel',
+    description: 'Telemetry numbers report a user who has the DevTools toolbox open for more than 5 minutes.',
     width: 700,
     height: 320,
     left: 60,
@@ -19,7 +19,6 @@ function(moment, _, T, DevToolsMetrics) {
   function evolutionMap(channel, evolutions) {
     // map the data into the values we need
     // histogram, index, date
-    if (evolutions === null) { return []; }
     return evolutions.map((h, i, date) => {
       return {
         channel: channel,

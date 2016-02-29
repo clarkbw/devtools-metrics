@@ -156,7 +156,11 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
     },
 
     reduceEvolutions: function(evolutions) {
-      return _.compact(evolutions).reduce(function(prev, curr) {
+      evolutions = _.compact(evolutions);
+      if (_.isEmpty(evolutions)) {
+        return [];
+      }
+      return evolutions.reduce(function(prev, curr) {
         return prev.combine(curr);
       });
     }
