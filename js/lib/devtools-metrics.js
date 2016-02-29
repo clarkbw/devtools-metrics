@@ -62,6 +62,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           target: '#' + ID,
           markers: FIREFOX_RELEASES.beta,
           y_extended_ticks: true,
+          aggregate_rollover: true,
           x_accessor: 'date',
           y_accessor: 'value',
           legend_target: '#' + ID + '-legend'
