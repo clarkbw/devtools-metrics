@@ -1,33 +1,10 @@
 /*global define*/
-define('app/panels-opened', ['jquery', 'MG', 'moment', 'd3', 'lodash', 'TelemetryPromises', 'FIREFOX_RELEASES'],
-function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
+define('app/panels-opened', ['jquery', 'MG', 'moment', 'd3', 'lodash', 'TelemetryPromises', 'FIREFOX_RELEASES', 'DEVTOOLS_PANELS'],
+function($, MG, moment, d3, _, T, FIREFOX_RELEASES, DEVTOOLS_PANELS) {
 
-  var metrics = [
-    {
-      label: 'Inspector',
-      metric: 'DEVTOOLS_INSPECTOR_OPENED_PER_USER_FLAG'
-    },
-    {
-      label: 'Console',
-      metric: 'DEVTOOLS_WEBCONSOLE_OPENED_PER_USER_FLAG'
-    },
-    {
-      label: 'Debugger',
-      metric: 'DEVTOOLS_JSDEBUGGER_OPENED_PER_USER_FLAG'
-    },
-    {
-      label: 'Network',
-      metric: 'DEVTOOLS_NETMONITOR_OPENED_PER_USER_FLAG'
-    },
-    {
-      label: 'Performance',
-      metric: 'DEVTOOLS_JSPROFILER_OPENED_PER_USER_FLAG'
-    },
-    {
-      label: 'Style Editor',
-      metric: 'DEVTOOLS_STYLEEDITOR_OPENED_PER_USER_FLAG'
-    }
-  ];
+  var metrics = DEVTOOLS_PANELS.map((m) => {
+    return { label: m.label, metric: m.metric.opened_per_user_flag, color: m.color };
+  });
   var ID = 'devtools-toolbox-panels-opened-chart';
   var CHANNEL = 'beta';
   var options = { sanitized: true };
@@ -74,7 +51,9 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
                           x_accessor: 'date',
                           y_accessor: 'value',
                           legend: metrics.map((m) => m.label),
-                          legend_target: '#' + ID + '-legend'
+                          legend_target: '#' + ID + '-legend',
+                          colors: metrics.map((m) => m.color),
+                          aggregate_rollover: true
                         });
                       }); // end of $()
 

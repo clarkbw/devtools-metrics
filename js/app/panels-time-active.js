@@ -1,33 +1,10 @@
 /*global define*/
-define('app/panels-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
-function(moment, _, T, DevToolsMetrics) {
+define('app/panels-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'DEVTOOLS_PANELS'],
+function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
 
-  var metrics = [
-    {
-      label: 'Inspector',
-      metric: 'DEVTOOLS_INSPECTOR_TIME_ACTIVE_SECONDS'
-    },
-    {
-      label: 'Console',
-      metric: 'DEVTOOLS_WEBCONSOLE_TIME_ACTIVE_SECONDS'
-    },
-    {
-      label: 'Debugger',
-      metric: 'DEVTOOLS_JSDEBUGGER_TIME_ACTIVE_SECONDS'
-    },
-    {
-      label: 'Network',
-      metric: 'DEVTOOLS_NETMONITOR_TIME_ACTIVE_SECONDS'
-    },
-    {
-      label: 'Performance',
-      metric: 'DEVTOOLS_JSPROFILER_TIME_ACTIVE_SECONDS'
-    },
-    {
-      label: 'Style Editor',
-      metric: 'DEVTOOLS_STYLEEDITOR_TIME_ACTIVE_SECONDS'
-    }
-  ];
+  var metrics = DEVTOOLS_PANELS.map((m) => {
+    return { label: m.label, metric: m.metric.time_active, color: m.color };
+  });
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-panels-time-active-chart';
@@ -36,6 +13,8 @@ function(moment, _, T, DevToolsMetrics) {
     title: 'All DevTools Panels Time Actively Spent',
     description: 'Time per panel grouped and plotted together with all other panels (log scale)',
     color_accessor: 'panel',
+    color_domain: metrics.map((m) => m.label),
+    color_range: metrics.map((m) => m.color),
     y_scale_type: 'log',
     width: 515,
     height: 320,

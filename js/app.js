@@ -18,6 +18,59 @@ requirejs.config({
     }
 });
 
+define('DEVTOOLS_PANELS', [], function() {
+  return [
+    {
+      label: 'Inspector',
+      color: '#ff9696',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_INSPECTOR_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_INSPECTOR_TIME_ACTIVE_SECONDS'
+      }
+    },
+    {
+      label: 'Console',
+      color: '#ffc265',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_WEBCONSOLE_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_WEBCONSOLE_TIME_ACTIVE_SECONDS'
+      }
+    },
+    {
+      label: 'Debugger',
+      color:  'rgb(104, 108, 74)',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_JSDEBUGGER_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_JSDEBUGGER_TIME_ACTIVE_SECONDS'
+      }
+    },
+    {
+      label: 'Network',
+      color: '#65ffbd',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_NETMONITOR_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_NETMONITOR_TIME_ACTIVE_SECONDS'
+      }
+    },
+    {
+      label: 'Performance',
+      color: '#7ff6ff',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_JSPROFILER_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_JSPROFILER_TIME_ACTIVE_SECONDS'
+      }
+    },
+    {
+      label: 'Style Editor',
+      color: '#b898ca',
+      metric: {
+        opened_per_user_flag: 'DEVTOOLS_STYLEEDITOR_OPENED_PER_USER_FLAG',
+        time_active: 'DEVTOOLS_STYLEEDITOR_TIME_ACTIVE_SECONDS'
+      }
+    }
+  ];
+});
+
 define('FIREFOX_RELEASES', [], function() {
   var TOO_OLD = new Date('2013-12-31');
   FIREFOX_RELEASES = FIREFOX_RELEASES.map(function(d) {
