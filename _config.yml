@@ -6,8 +6,9 @@ exclude:
 - LICENSE
 - CONTRIBUTING.md
 
-# site
-url: https://clarkbw.github.io
+site:
+  github:
+    url: https://clarkbw.github.io
 
 # do not include protocol, just the domain
 enforce_ssl: clarkbw.github.io
