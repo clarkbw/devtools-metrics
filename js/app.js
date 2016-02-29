@@ -22,7 +22,7 @@ define('DEVTOOLS_PANELS', [], function() {
   return [
     {
       label: 'Inspector',
-      color: '#ff9696',
+      color: '#4C9ED9',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_INSPECTOR_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_INSPECTOR_TIME_ACTIVE_SECONDS'
@@ -30,7 +30,7 @@ define('DEVTOOLS_PANELS', [], function() {
     },
     {
       label: 'Console',
-      color: '#ffc265',
+      color: '#F13C00',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_WEBCONSOLE_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_WEBCONSOLE_TIME_ACTIVE_SECONDS'
@@ -38,7 +38,7 @@ define('DEVTOOLS_PANELS', [], function() {
     },
     {
       label: 'Debugger',
-      color:  'rgb(104, 108, 74)',
+      color:  '#D97E00',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_JSDEBUGGER_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_JSDEBUGGER_TIME_ACTIVE_SECONDS'
@@ -46,7 +46,7 @@ define('DEVTOOLS_PANELS', [], function() {
     },
     {
       label: 'Network',
-      color: '#65ffbd',
+      color: '#2CBB51',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_NETMONITOR_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_NETMONITOR_TIME_ACTIVE_SECONDS'
@@ -54,7 +54,7 @@ define('DEVTOOLS_PANELS', [], function() {
     },
     {
       label: 'Performance',
-      color: '#7ff6ff',
+      color: '#B4DEFD',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_JSPROFILER_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_JSPROFILER_TIME_ACTIVE_SECONDS'
@@ -62,7 +62,7 @@ define('DEVTOOLS_PANELS', [], function() {
     },
     {
       label: 'Style Editor',
-      color: '#b898ca',
+      color: '#B2B2B2',
       metric: {
         opened_per_user_flag: 'DEVTOOLS_STYLEEDITOR_OPENED_PER_USER_FLAG',
         time_active: 'DEVTOOLS_STYLEEDITOR_TIME_ACTIVE_SECONDS'
