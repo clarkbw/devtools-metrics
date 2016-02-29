@@ -7,6 +7,18 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{{ page.title }}</title>
 
+    {% if site.enforce_ssl %}
+    <!--
+      redirect users to the https version of the website.
+      but: only check when on the production domain, as set in _config.yml.
+     -->
+    <script type="text/javascript">
+      var enforce = "{{ site.enforce_ssl }}";
+      if ((enforce == window.location.host) && (window.location.protocol != "https:"))
+        window.location = window.location.toString().replace(/^http:/, "https:");
+    </script>
+    {% endif %}
+
     <link rel="icon" type="image/x-icon" href="{{ page.url | prepend: site.github.url }}images/dev-edition-small.png">
 
     <!-- Twitter and OpenGraph data
