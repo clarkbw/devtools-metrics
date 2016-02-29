@@ -8,7 +8,8 @@ requirejs.config({
       'moment': '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment',
       'MG': 'lib/metricsgraphics',
       'Telemetry': '//telemetry.mozilla.org/v2/telemetry',
-      'TelemetryPromises': 'lib/telemetry-promises'
+      'TelemetryPromises': 'lib/telemetry-promises',
+      'DevToolsMetrics': 'lib/devtools-metrics'
     },
     shim: {
       'Telemetry': {

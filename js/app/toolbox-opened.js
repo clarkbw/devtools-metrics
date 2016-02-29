@@ -1,10 +1,20 @@
 /*global define*/
-define('app/toolbox-opened', ['jquery', 'MG', 'moment', 'd3', 'lodash', 'TelemetryPromises', 'FIREFOX_RELEASES'],
-function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
+define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
+function(moment, _, T, DevToolsMetrics) {
 
   var metric = 'DEVTOOLS_TOOLBOX_OPENED_PER_USER_FLAG';
-  var ID = 'devtools-toolbox-opened-chart';
   var options = { sanitized: true };
+
+  var ID = 'devtools-toolbox-opened-chart';
+  var chart = {
+    title: 'DevTools Toolbox Opened',
+    description: metric,
+    width: 700,
+    height: 320,
+    left: 60,
+    legend: T.ALL_CHANNELS,
+    legend_target: '#' + ID + '-legend'
+  };
 
   function evolutionMap(channel, evolutions) {
     // map the data into the values we need
@@ -19,6 +29,8 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
     });
   }
 
+  DevToolsMetrics.line(ID, chart);
+
   T.getTargets().then((targets) => {
 
     Promise.all(targets.map((target) => {
@@ -27,28 +39,9 @@ function($, MG, moment, d3, _, T, FIREFOX_RELEASES) {
               then((evolutions) => evolutionMap(target.channel, evolutions)).
               then(_.flatten);
     })).then((data) => {
-        $(function() {
-          MG.data_graphic({
-            title: 'DevTools Toolbox Opened',
-            description: metric,
-            data: data,
-            missing_is_hidden: true,
-            // missing_is_zero: true,
-            interpolate: 'basic',
-            width: 700,
-            height: 320,
-            left: 60,
-            animate_on_load: true,
-            target: '#' + ID,
-            y_extended_ticks: true,
-            markers: FIREFOX_RELEASES.beta,
-            x_accessor: 'date',
-            y_accessor: 'value',
-            legend: ['nightly', 'aurora', 'beta', 'release'],
-            legend_target: '#' + ID + '-legend'
-          });
-        }); // end of $()
-
-      });
+      chart.data = data;
+      DevToolsMetrics.line(ID, chart);
     });
+  });
+
 }); // end define
