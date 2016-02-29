@@ -7,7 +7,7 @@ define('app/main', ['moment', 'TelemetryPromises'], function(moment, TelemetryPr
   moment.relativeTimeThreshold('m', 59);
 
   TelemetryPromises.init().then(() => {
-    requirejs(['app/toolbox-active-time']);
+    requirejs(['app/toolbox-time-active']);
     requirejs(['app/toolbox-opened']);
     requirejs(['app/panels-opened']);
     requirejs(['app/empty-graphs']);

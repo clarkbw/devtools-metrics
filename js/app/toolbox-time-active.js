@@ -1,11 +1,11 @@
 /*global define*/
-define('app/toolbox-active-time', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
+define('app/toolbox-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
 function(moment, _, T, DevToolsMetrics) {
 
   var metric = 'DEVTOOLS_TOOLBOX_TIME_ACTIVE_SECONDS';
   var options = { sanitized: true };
 
-  var ID = 'devtools-toolbox-usage-chart';
+  var ID = 'devtools-toolbox-time-active-chart';
   var chart = {
     title: 'DevTools Toolbox Active Time Spent',
     description: metric,
