@@ -7,7 +7,7 @@ exclude:
 - CONTRIBUTING.md
 
 github:
-  url: https://clarkbw.github.io
+  url: https://clarkbw.github.io/devtools-metrics
 
 # do not include protocol, just the domain
 enforce_ssl: clarkbw.github.io
