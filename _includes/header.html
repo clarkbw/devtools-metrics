@@ -9,6 +9,16 @@
 
     <link rel="icon" type="image/x-icon" href="{{ page.url | prepend: site.github.url }}images/dev-edition-small.png">
 
+    <!-- Twitter and OpenGraph data
+    ================================================== -->
+    <meta name="twitter:site" content="@18F">
+    <meta name="twitter:creator" content="@18F">
+    <meta property="og:site_name" content="{{ site.title | xml_escape }}" />
+    <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="{{ page.url | prepend: site.github.url }}" />
+    <link rel="canonical" href="{{ page.url | prepend: site.github.url }}" />
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"

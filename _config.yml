@@ -1,1 +1,14 @@
-defaults:
+
+exclude:
+- Gemfile
+- Gemfile.lock
+- README.md
+- LICENSE
+- CONTRIBUTING.md
+
+# site
+url: https://clarkbw.github.io
+
+# metadata
+title: 18F Digital Services Delivery
+description: "18F builds effective, user-centric digital services focused on the interaction between government and the people and businesses it serves."
