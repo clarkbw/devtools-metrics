@@ -1,18 +1,19 @@
 /*global define*/
-define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
-function(moment, _, T, DevToolsMetrics) {
+define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
+function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_TOOLBOX_OPENED_BOOLEAN';
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-opened-chart';
   var chart = {
-    title: 'DevTools User Sessions per Firefox Release Channel',
-    description: 'Telemetry numbers report a user who has the DevTools toolbox open for more than 5 minutes.',
-    width: 700,
+    title: 'Toolbox Opened Per User / Day (DAU)',
+    description: 'Telemetry numbers report how many times users have opened the DevTools toolbox in the day.',
+    width: 335,
     height: 320,
     left: 60,
     legend: T.ALL_CHANNELS,
+    colors: Object.values(FIREFOX_RELEASES.colors),
     legend_target: '#' + ID + '-legend'
   };
 
@@ -30,9 +31,8 @@ function(moment, _, T, DevToolsMetrics) {
 
   DevToolsMetrics.line(ID, chart);
 
-  T.getTargets().then((targets) => {
-
-    Promise.all(targets.map((target) => {
+  LatestVersions.getLatestVersion().then((versions) => {
+    Promise.all(versions.map((target) => {
       return T.getEvolutions(target.channel, target.versions, metric, options).
               then((evolutions) => T.reduceEvolutions(evolutions)).
               then((evolutions) => evolutionMap(target.channel, evolutions)).

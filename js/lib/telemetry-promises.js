@@ -42,6 +42,10 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
         if (!this.isInitialized()) {
           return reject('Telemetry must be initialized with the init function');
         }
+        if (from.version > to.version) {
+          return reject('From version should be less than or equal the to version' +
+                        'from.version = ' + from.version + ' and to.version = ' + to.version);
+        }
         if (from.version < EARLIEST_VERSION || to.version < EARLIEST_VERSION) {
           return reject('Telemetry is no good before ' + EARLIEST_VERSION + '\n' +
                         'from.version = ' + from.version + ' and to.version = ' + to.version);
@@ -50,16 +54,29 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
           return reject('Telemetry only recognizes these channels ' + ALL_CHANNELS + '\n' +
                         'from.channel = ' + from.channel + ' and to.channel = ' + to.channel);
         }
-        // Telemetry expects the scheme "nightly/42"
-        var versions = Telemetry.getVersions([from.channel, from.version].join('/'),
-                                             [to.channel, to.version].join('/'));
-        var filtered = versions.map(function(version) {
-          var v = version.split('/'); // CHROME!!!
-          return { channel: v[0], version: v[1] };
-        }).filter(function(version) {
-          return (version.version >= from.version && version.version <= to.version);
+        // aurora, beta would return only aurora and beta
+        // while nightly, releaes would return those and all channels between
+        var channels = ALL_CHANNELS.slice(ALL_CHANNELS.indexOf(from.channel),
+                                          ALL_CHANNELS.indexOf(to.channel) + 1);
+
+        // console.log('from', from.version, 'to', to.version);
+        var vFrom = from.version - (4 - channels.length);
+        var vTo = to.version + (channels.length - 4);
+        var versions = channels.map((channel) => {
+          return {
+            channel: channel,
+            versions: Object.keys(Telemetry.CHANNEL_VERSION_DATES[channel]).filter((version) => {
+              var vInt = parseInt(version, 10);
+              // console.log(vInt,' >= ', vFrom, ' && ', vInt,' <= ', vTo);
+              // console.log('channels', vInt - ((channels.length) - channels.indexOf(channel)));
+              return (Telemetry.CHANNEL_VERSION_BUILDIDS[channel] &&
+                      Telemetry.CHANNEL_VERSION_BUILDIDS[channel][version] &&
+                      (vInt >= vFrom + (channels.length - channels.indexOf(channel)) &&
+                       vInt <= vTo + (channels.length - channels.indexOf(channel))));
+            })
+          };
         });
-        return resolve(filtered);
+        return resolve(versions);
       });
     },
 

@@ -1,6 +1,6 @@
 /*global define*/
-define('app/panels-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'DEVTOOLS_PANELS'],
-function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
+define('app/panels-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'DEVTOOLS_PANELS', 'LatestVersions'],
+function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS, LatestVersions) {
 
   var metrics = DEVTOOLS_PANELS.map((m) => {
     return { label: m.label, metric: m.metric.opened_per_user_flag, color: m.color };
@@ -8,7 +8,6 @@ function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-panels-opened-chart';
-  var CHANNEL = 'beta';
   var chart = {
     title: 'DevTools Panels Opening Compared',
     description: 'All Panels Compared',
@@ -35,19 +34,17 @@ function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
 
   DevToolsMetrics.line(ID, chart);
 
-  T.getLatestVersion(CHANNEL).then((version) => {
-    T.getVersions({ channel: CHANNEL, version: (version - 5)},
-                  { channel: CHANNEL, version: (version - 1)}).then((versions) => {
-                    Promise.all(metrics.map((m) => {
-                      return T.getEvolutions(CHANNEL, versions.map((v) => v.version), m.metric, options).
-                              then((evolutions) => T.reduceEvolutions(evolutions)).
-                              then((evolutions) => evolutionMap(m.label, evolutions)).
-                              then(_.flatten);
-                    })).then((data) => {
-                      chart.data = data;
-                      DevToolsMetrics.line(ID, chart);
-                    });
-                  });
+  LatestVersions.getLatestVersion().then((versions) => {
+    var channel = _.find(versions, { channel: 'beta' });
+    Promise.all(metrics.map((m) => {
+      return T.getEvolutions(channel.channel, channel.versions, m.metric, options).
+              then((evolutions) => T.reduceEvolutions(evolutions)).
+              then((evolutions) => evolutionMap(m.label, evolutions)).
+              then(_.flatten);
+    })).then((data) => {
+      chart.data = data;
+      DevToolsMetrics.line(ID, chart);
+    });
   });
 
 }); // end define

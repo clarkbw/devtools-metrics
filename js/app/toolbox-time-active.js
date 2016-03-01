@@ -1,6 +1,6 @@
 /*global define*/
-define('app/toolbox-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics'],
-function(moment, _, T, DevToolsMetrics) {
+define('app/toolbox-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
+function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_TOOLBOX_TIME_ACTIVE_SECONDS';
   var options = { sanitized: true };
@@ -9,7 +9,9 @@ function(moment, _, T, DevToolsMetrics) {
   var chart = {
     title: 'DevTools Toolbox Active Time Spent',
     description: metric,
-    width: 335,
+    color_range: Object.values(FIREFOX_RELEASES.colors),
+    color_domain: T.ALL_CHANNELS,
+    width: 1024,
     height: 320,
     left: 60
   };
@@ -29,13 +31,13 @@ function(moment, _, T, DevToolsMetrics) {
 
   DevToolsMetrics.point(ID, chart);
 
-  T.getTargets().then((targets) => {
-
-    Promise.all(targets.map((target) =>
-      T.getEvolutions(target.channel, target.versions, metric, options).
+  LatestVersions.getLatestVersion().then((versions) => {
+    Promise.all(versions.map((target) => {
+      return T.getEvolutions(target.channel, target.versions, metric, options).
               then((evolutions) => T.reduceEvolutions(evolutions)).
               then((evolutions) => evolutionMap(target.channel, evolutions)).
-              then(_.flatten)
+              then(_.flatten);
+    }
     )).then(_.flatten). // flatten again because we want one big cluster of data
         then((data) => {
           chart.data = data;

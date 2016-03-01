@@ -1,6 +1,6 @@
 /*global define*/
-define('app/panels-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'DEVTOOLS_PANELS'],
-function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
+define('app/panels-time-active', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'DEVTOOLS_PANELS', 'LatestVersions'],
+function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS, LatestVersions) {
 
   var metrics = DEVTOOLS_PANELS.map((m) => {
     return { label: m.label, metric: m.metric.time_active, color: m.color };
@@ -8,7 +8,6 @@ function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-panels-time-active-chart';
-  var CHANNEL = 'beta';
   var chart = {
     title: 'All DevTools Panels Time Actively Spent',
     description: 'Time per panel grouped and plotted together with all other panels (log scale)',
@@ -36,19 +35,17 @@ function(moment, _, T, DevToolsMetrics, DEVTOOLS_PANELS) {
 
   DevToolsMetrics.point(ID, chart);
 
-  T.getLatestVersion(CHANNEL).then((version) => {
-    T.getVersions({ channel: CHANNEL, version: (version - 5)},
-                  { channel: CHANNEL, version: (version - 1)}).then((versions) => {
-                    Promise.all(metrics.map((m) => {
-                      return T.getEvolutions(CHANNEL, versions.map((v) => v.version), m.metric, options).
-                              then((evolutions) => T.reduceEvolutions(evolutions)).
-                              then((evolutions) => evolutionMap(m.label, evolutions)).
-                              then(_.flatten);
-                    })).then(_.flatten). // flatten again because we want one big cluster of data
-                       then((data) => {
-                      chart.data = data;
-                      DevToolsMetrics.point(ID, chart);
-                    });
-                  });
+  LatestVersions.getLatestVersion().then((versions) => {
+    var channel = _.find(versions, { channel: 'beta' });
+    Promise.all(metrics.map((m) => {
+      return T.getEvolutions(channel.channel, channel.versions, m.metric, options).
+              then((evolutions) => T.reduceEvolutions(evolutions)).
+              then((evolutions) => evolutionMap(m.label, evolutions)).
+              then(_.flatten);
+    })).then(_.flatten). // flatten again because we want one big cluster of data
+       then((data) => {
+      chart.data = data;
+      DevToolsMetrics.point(ID, chart);
+    });
   });
 }); // end define

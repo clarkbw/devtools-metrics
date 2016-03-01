@@ -82,6 +82,12 @@ define('FIREFOX_RELEASES', [], function() {
       return d['date'] > TOO_OLD;
   });
   return {
+    colors: {
+      nightly: '#002147',
+      aurora: '#0095DD',
+      beta: '#FFCB00',
+      release: '#E66000'
+    },
     release: FIREFOX_RELEASES,
     beta: FIREFOX_RELEASES.map((release) => {
       var version = parseInt(release.version, 10) + 1;

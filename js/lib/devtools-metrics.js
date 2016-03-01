@@ -10,7 +10,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
       point: function(ID, options) {
         options = _.defaults(options, {
           least_squares: true,
-          missing_is_hidden: false,
+          missing_is_hidden: true,
           missing_is_zero: false,
           interpolate: 'basic',
           width: 335,
@@ -23,7 +23,6 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           },
           markers: FIREFOX_RELEASES.beta,
           y_extended_ticks: true,
-          // y_scale_type: 'log',
           color_accessor: 'channel',
           color_type:'category',
           size_accessor:'submissions',
@@ -43,7 +42,6 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
         if (options.data) {
           options.chart_type = 'point';
         }
-
         $(function() {
           MG.data_graphic(options);
         });
