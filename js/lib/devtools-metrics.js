@@ -4,7 +4,8 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
   var DEFAULTS = {
     title: '',
     description: '',
-    chart_type: 'missing-data'
+    chart_type: 'missing-data',
+    full_width: true
   };
   return {
       point: function(ID, options) {
