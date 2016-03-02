@@ -40,7 +40,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           DEFAULTS);
 
         // when data is passed along we set the chart to the right type
-        if (options.data) {
+        if (options.data && !_.isEmpty(options.data)) {
           options.chart_type = 'point';
         }
         $(function() {
@@ -69,7 +69,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           DEFAULTS);
 
         // when data is passed along we set the chart to the right type
-        if (options.data) {
+        if (options.data && !_.isEmpty(options.data)) {
           delete options.chart_type;
         }
 

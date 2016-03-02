@@ -7,6 +7,9 @@ define('app/main-tilt', ['moment', 'TelemetryPromises'], function(moment, Teleme
   moment.relativeTimeThreshold('m', 59);
 
   TelemetryPromises.init().then(() => {
+    requirejs(['app/tilt-opened']);
+    requirejs(['app/tilt-opened-per-user']);
+    requirejs(['app/tilt-time-active']);
   });
 
 }); // end define
