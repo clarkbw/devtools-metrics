@@ -9,7 +9,7 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
   var chart = {
     title: 'DevTools Toolbox Active Time Spent',
     description: metric,
-    color_range: Object.values(FIREFOX_RELEASES.colors),
+    color_range: _.values(FIREFOX_RELEASES.colors),
     color_domain: T.ALL_CHANNELS,
     width: 1024,
     height: 320,

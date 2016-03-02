@@ -13,7 +13,7 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
     height: 320,
     left: 60,
     legend: T.ALL_CHANNELS,
-    colors: Object.values(FIREFOX_RELEASES.colors),
+    colors: _.values(FIREFOX_RELEASES.colors),
     legend_target: '#' + ID + '-legend'
   };
 
