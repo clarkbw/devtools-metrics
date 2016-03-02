@@ -19,7 +19,7 @@
     </script>
     {% endif %}
 
-    <link rel="icon" type="image/x-icon" href="{{ page.url | prepend: site.github.url }}images/dev-edition-small.png">
+    <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/images/dev-edition-small.png">
 
     <!-- Twitter and OpenGraph data
     ================================================== -->
@@ -28,8 +28,8 @@
     <meta property="og:site_name" content="{{ site.title | xml_escape }}" />
     <meta property="og:type" content="website" />
 
-    <meta property="og:url" content="{{ page.url | prepend: site.github.url }}" />
-    <link rel="canonical" href="{{ page.url | prepend: site.github.url }}" />
+    <meta property="og:url" content="{{ page.url | prepend: site.github.page }}" />
+    <link rel="canonical" href="{{ page.url | prepend: site.github.page }}" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
@@ -37,7 +37,7 @@
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
           crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ page.url | prepend: site.github.url }}css/metricsgraphics.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/metricsgraphics.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,8 +60,6 @@
       {% endfor %}
     ];
     </script>
-
-    <script data-main="js/app" src="{{ page.url | prepend: site.github.url }}js/lib/require.js"></script>
 
   </head>
   <body>

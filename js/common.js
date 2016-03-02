@@ -116,5 +116,17 @@ define('FIREFOX_RELEASES', [], function() {
   };
 });
 
-// Load the main app module to start the app
-requirejs(['app/main']);
+define('LatestVersions', ['TelemetryPromises'], function(TelemetryPromises) {
+  var FROM_CHANNEL = 'nightly',
+      TO_CHANNEL = 'release';
+  return {
+    getLatestVersion:  function() {
+      return TelemetryPromises.getLatestVersion(TO_CHANNEL).then((version) => {
+            var f = { channel: FROM_CHANNEL, version: (version - 6)},
+                t = { channel: TO_CHANNEL, version: (version - 1)};
+                return TelemetryPromises.getVersions(f, t);
+      });
+    }
+  };
+
+});

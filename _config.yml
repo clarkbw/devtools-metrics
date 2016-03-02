@@ -6,8 +6,11 @@ exclude:
 - LICENSE
 - CONTRIBUTING.md
 
+baseurl: /devtools-metrics
+
 github:
   host: clarkbw.github.io
+  page: /devtools-metrics
   url: https://clarkbw.github.io/devtools-metrics
 
 # metadata
