@@ -31,7 +31,6 @@ function(moment, _, d3, T, DevToolsMetrics, LatestVersions) {
     13:'unknown'
   }
   function evolutionMap(evolutions) {
-    console.log('evolutionMap', evolutions);
     // map the data into the values we need
     // histogram, index, date
     return _.flatten(evolutions.map((h, i, date) => {
@@ -52,25 +51,16 @@ function(moment, _, d3, T, DevToolsMetrics, LatestVersions) {
     _.remove(versions, { channel: 'release' });
     Promise.all(versions.map((target) => {
       return T.getEvolutions(target.channel, target.versions, metric, options).
-              then((evolutions) => {
-                console.log('evolutions', evolutions);
-                return T.reduceEvolutions(evolutions);
-              });
-    })).then((evolutions) => {
-      console.log('evolutions2', evolutions);
-      return T.reduceEvolutions(evolutions);
-    }).then((evolutions) => {
-      var map = evolutionMap(evolutions);
-      console.log('map', map);
-      return map;
-    }).then((data) => {
+              then((evolutions) => T.reduceEvolutions(evolutions));
+    })).then((evolutions) => T.reduceEvolutions(evolutions)
+    ).then((evolutions) => evolutionMap(evolutions)
+    ).then((data) => {
       var grouped = _.groupBy(data, 'os');
       chart.legend = _.keys(grouped);
       return _.values(grouped);
     })
     .then((data) => {
       chart.data = data;
-      console.log('data', data);
       DevToolsMetrics.line(ID, chart);
     });
   });
