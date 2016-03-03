@@ -31,11 +31,21 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
   DevToolsMetrics.line(ID, chart);
 
 LatestVersions.getLatestVersion().then((versions) => {
+  var total = versions.reduce((prev, curr) => (prev + curr.versions.length), 0);
+  var current = total;
+  DevToolsMetrics.progress(ID, total, current);
   Promise.all(versions.map((target) => {
-    return T.getEvolutions(target.channel, target.versions, metric, options).
-            then((evolutions) => T.reduceEvolutions(evolutions)).
-            then((evolutions) => evolutionMap(target.channel, evolutions)).
-            then(_.flatten);
+    return Promise.all(target.versions.map((version) => {
+      return T.getEvolution(target.channel, version, metric, options).then(function (evo) {
+        DevToolsMetrics.progress(ID, total, current -= 1);
+        return evo;
+      }).catch(function () {
+        DevToolsMetrics.progress(ID, total, current -= 1);
+        return null;
+      });
+    })).then((evolutions) => T.reduceEvolutions(evolutions)).
+        then((evolutions) => evolutionMap(target.channel, evolutions)).
+        then(_.flatten);
   })).then((data) => {
     chart.data = data;
     DevToolsMetrics.line(ID, chart);

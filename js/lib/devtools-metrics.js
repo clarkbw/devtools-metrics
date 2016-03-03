@@ -8,6 +8,23 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
     full_width: true
   };
   return {
+    progress: function(ID, total, current) {
+      $(function() {
+        var $progress = $('#' + ID + '-progress');
+        var percent = Math.abs(Math.round(100 * ((current / total) - 1)));
+
+        if (!$progress.hasClass('progress')) {
+          // create
+          $progress.addClass('progress').append(
+            $('<div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"/>')
+          );
+        }
+        $progress.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%');
+        if (percent === 100) {
+          $progress.fadeOut();
+        }
+      });
+    },
       point: function(ID, options) {
         options = _.defaults(options, {
           least_squares: true,
