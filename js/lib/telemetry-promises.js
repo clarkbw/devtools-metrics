@@ -119,7 +119,39 @@ define('TelemetryPromises', ['lodash', 'Telemetry'], function(_, Telemetry) {
     },
 
     /**
-     * Gets the latest released version number available for the channel
+     * Returns a Telemetry Historgram
+     * https://github.com/mozilla/telemetry-dashboard/blob/master/v2/doc.md#telemetrygethistograminfochannel-version-metric-usesubmissiondate-function-callbackkind-description-buckets-dates---
+     * @param {string} channel - The channel of Firefox (nightly, aurora, beta, or release)
+     * @param {string} version - The version (int) of Firefox 40, 44, 45
+     * @param {string} metric - The Telemtry metric to query e.g. DEVTOOLS_TOOLBOX_TIME_ACTIVE_SECONDS
+     * @param {object} options - Options that
+     */
+    getHistogramInfo: function(channel, version, metric, options) {
+      options = _.defaults(options, {
+        useSubmissionDate: true
+      });
+      return new Promise((resolve, reject) => {
+        if (!this.isInitialized()) {
+          return reject('Telemetry must be initialized with the init function');
+        }
+        if (ALL_CHANNELS.indexOf(channel) < 0) {
+          return reject('Telemetry only recognizes these channels ' + ALL_CHANNELS + '\n' +
+                        'channel = ' + channel);
+        }
+        if (metric === undefined) {
+          return reject('Telemetry metrics like DEVTOOLS_TOOLBOX_TIME_ACTIVE_SECONDS are required');
+        }
+        Telemetry.getHistogramInfo(channel, version, metric, options.useSubmissionDate,
+          (kind, description, buckets, dates) => {
+            // if (_.isEmpty(evo)) { return reject(); }
+            return resolve(kind, description, buckets, dates);
+          });
+      });
+    },
+
+    /**
+     * Returns a Telemetry Evolution
+     * https://github.com/mozilla/telemetry-dashboard/blob/master/v2/doc.md#telemetrygetevolutionchannel-version-metric-filters-usesubmissiondate-function-callbackevolutionmap---
      * @param {string} channel - The channel of Firefox (nightly, aurora, beta, or release)
      * @param {string} version - The version (int) of Firefox 40, 44, 45
      * @param {string} metric - The Telemtry metric to query e.g. DEVTOOLS_TOOLBOX_TIME_ACTIVE_SECONDS
