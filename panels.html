@@ -1,0 +1,49 @@
+---
+title: DevTools Panels
+---
+
+{% include header.html %}
+
+<script data-main="js/panels" src="{{ site.baseurl }}/js/lib/require.js"></script>
+
+{% include navbar.html %}
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12 graph-header text-center">
+        <h4>DevTools Panels (Beta Channel Only)</h4>
+      </div>
+    </div>
+
+    <!-- All Panels Compared  -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-panels-opened-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div id="devtools-toolbox-panels-opened-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-toolbox-panels-time-active-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div id="devtools-toolbox-panels-time-active-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% include footer.html %}
