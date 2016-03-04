@@ -1,9 +1,15 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Firefox DevTools Metrics Dashboard
+      <a class="navbar-brand" href="{{ site.baseurl }}/">Firefox DevTools Metrics Dashboard
         <!-- <img alt="DevEdition Icon" src="{{ page.url | prepend: site.github.url }}images/dev-edition-small.png"> -->
       </a>
     </div>
   </div>
 </nav>
+{% if page.url != '/' %}
+  <ol class="breadcrumb">
+    <li><a href="{{ site.baseurl }}/">Home</a></li>
+    <li class="active">{{ page.title }}</li>
+  </ol>
+{% endif %}
