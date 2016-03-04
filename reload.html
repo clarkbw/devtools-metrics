@@ -1,0 +1,85 @@
+---
+title: DevTools Reload
+---
+
+{% include header.html %}
+
+<script data-main="js/reload" src="{{ site.baseurl }}/js/lib/require.js"></script>
+
+{% include navbar.html %}
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12 graph-header text-center">
+        <h4>DevTools Reload Addon Installed</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-reload-addon-installed-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div class="text-center" id="devtools-reload-addon-installed-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-reload-addon-installed-per-user-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div class="text-center" id="devtools-reload-addon-installed-per-user-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <p>&nbsp;</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 graph-header text-center">
+        <h4>DevTools Reload Usage</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-reload-addon-reloaded-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div class="text-center" id="devtools-reload-addon-reloaded-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 graph-body">
+            <div id="devtools-reload-addon-reloaded-per-user-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 graph-legend">
+            <div class="text-center" id="devtools-reload-addon-reloaded-per-user-chart-legend"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% include footer.html %}
