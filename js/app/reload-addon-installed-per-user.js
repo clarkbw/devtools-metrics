@@ -1,9 +1,9 @@
 /*global define*/
-define('app/reload-addon-installed-per-user', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
-function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
+define('app/reload-addon-installed-per-user', ['lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
+function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_RELOAD_ADDON_INSTALLED_PER_USER_FLAG';
-  var options = { sanitized: true };
+  var options = { sanitized: false };
   var ID = 'devtools-reload-addon-installed-per-user-chart';
   var chart = {
     title: 'Reload Addon Installed per User / Release (MAU)',

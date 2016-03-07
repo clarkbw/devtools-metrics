@@ -1,9 +1,9 @@
 /*global define*/
-define('app/reload-addon-installed', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
-function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
+define('app/reload-addon-installed', ['lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
+function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_RELOAD_ADDON_INSTALLED_COUNT';
-  var options = { sanitized: true };
+  var options = { sanitized: false };
 
   var ID = 'devtools-reload-addon-installed-chart';
   var chart = {
