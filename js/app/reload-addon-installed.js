@@ -35,6 +35,7 @@ function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
   LatestVersions.getLatestVersion().then((versions) => {
     versions = _.filter(versions, { channel: "nightly"});
     Promise.all(versions.map((target) => {
+      target.versions = [_.max(target.versions)];
       return T.getEvolutions(target.channel, target.versions, metric, options).
               then((evolutions) => T.reduceEvolutions(evolutions)).
               then((evolutions) => evolutionMap(target.channel, evolutions)).
