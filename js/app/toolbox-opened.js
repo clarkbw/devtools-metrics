@@ -3,6 +3,17 @@ define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevTools
 function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_TOOLBOX_OPENED_BOOLEAN';
+  var newMetric = 'DEVTOOLS_TOOLBOX_OPENED_COUNT';
+  // the old BOOLEAN metric is being phased out so this dictionary
+  // (assuming it is updated per release) will help us show activity as the
+  // new metric moves in and the old metric fades away.
+  var metrics = {
+    'nightly': newMetric,
+    'aurora': newMetric,
+    'beta': metric,
+    'release': metric
+  };
+
   var options = { sanitized: true };
 
   var ID = 'devtools-toolbox-opened-chart';
@@ -37,7 +48,10 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
     DevToolsMetrics.progress(ID, total, current);
     Promise.all(versions.map((target) => {
       return Promise.all(target.versions.map((version) => {
-        return T.getEvolution(target.channel, version, metric, options).then(function (evo) {
+        if (!metrics[target.channel]) {
+          console.log(target.channel, ' not in ', metrics);
+        }
+        return T.getEvolution(target.channel, version, metrics[target.channel], options).then(function (evo) {
           DevToolsMetrics.progress(ID, total, current -= 1);
           return evo;
         }).catch(function () {
