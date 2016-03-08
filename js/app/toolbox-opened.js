@@ -48,9 +48,6 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
     DevToolsMetrics.progress(ID, total, current);
     Promise.all(versions.map((target) => {
       return Promise.all(target.versions.map((version) => {
-        if (!metrics[target.channel]) {
-          console.log(target.channel, ' not in ', metrics);
-        }
         return T.getEvolution(target.channel, version, metrics[target.channel], options).then(function (evo) {
           DevToolsMetrics.progress(ID, total, current -= 1);
           return evo;
