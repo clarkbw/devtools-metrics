@@ -4,8 +4,8 @@ function(_, T, DevToolsMetrics, FIREFOX_RELEASES) {
 
   var ID = 'devtools-toolbox-engagement-ratio-chart';
   var chart = {
-    title: 'Engagement Ratio',
-    description: '',
+    title: 'Engagement Ratio (DAU/MAU)',
+    description: 'The ratio of daily user activity to monthly users',
     width: 335,
     height: 320,
     left: 60,
