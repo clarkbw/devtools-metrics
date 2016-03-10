@@ -25,8 +25,17 @@ title: DevTools Dashboard
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 graph-legend">
-            <div class="text-center" id="devtools-toolbox-opened-chart-legend"></div>
+          <div class="col-md-12 graph-legend text-center">
+            <div id="devtools-toolbox-opened-chart-legend"></div>
+            <p>&nbsp;</p>
+            <p>
+              DevTools is transitioning to the new metric <code>DEVTOOLS_TOOLBOX_OPENED_COUNT</code>, which records the
+              number of times a user opens the toolbox per day.  Previously DevTools was using the metric
+              <code>DEVTOOLS_TOOLBOX_OPENED_BOOLEAN</code> which only captured the toolbox being opened once per user, per day.
+              As the rollout of the new metric continues this graph will shift over time and have certain releases missing.
+              Also note that the new metric has been changed to opt-out for release so those numbers will also shift as
+              it rolls out into the full release population.
+            </p>
           </div>
         </div>
       </div>
@@ -34,12 +43,19 @@ title: DevTools Dashboard
         <div class="row">
           <div class="col-md-12 graph-body">
             <div id="devtools-toolbox-opened-per-user-chart"></div>
-            <div id="devtools-toolbox-opened-per-user-chart-progress"></div>
+            <!-- <div id="devtools-toolbox-opened-per-user-chart-progress"></div> -->
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 graph-legend">
-            <div class="text-center" id="devtools-toolbox-opened-per-user-chart-legend"></div>
+          <div class="col-md-12 graph-legend text-center">
+            <div id="devtools-toolbox-opened-per-user-chart-legend"></div>
+            <p>&nbsp;</p>
+            <p>
+              The <code>DEVTOOLS_TOOLBOX_OPENED_PER_USER_FLAG</code> will become opt-out for release when
+              <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1250171">bug 1250171</a> is fixed, however until
+              that time the release (not pre-release) numbers will remain highly inaccurate.
+            </p>
+
           </div>
         </div>
       </div>
