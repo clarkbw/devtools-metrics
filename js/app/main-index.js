@@ -8,8 +8,13 @@ define('app/main-index', ['moment', 'TelemetryPromises'], function(moment, Telem
 
   TelemetryPromises.init().then(() => {
     requirejs(['app/empty-graphs']);
-    requirejs(['app/toolbox-opened']);
-    requirejs(['app/toolbox-opened-per-user']);
+    requirejs(['app/toolbox-opened', 'app/toolbox-opened-per-user', 'app/toolbox-engagement-ratio'],
+    function(dau, mau, engaged) {
+      Promise.all([dau, mau]).then((datas) => {
+        //      dau,      mau
+        engaged(datas[0], datas[1]);
+      });
+    });
     requirejs(['app/toolbox-time-active']);
   });
 
