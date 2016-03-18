@@ -19,6 +19,13 @@ define('app/main-about-debugging', ['moment', 'TelemetryPromises'], function(mom
         'devtools-about-debugging-opened-per-user-chart', {
           title: 'about:debugging opened per user'
         });
+        // TODO: engagement ratio?
+    });
+    requirejs(['lib/telemetry/time-active-seconds'],function (tac) {
+      tac.graph(
+        'DEVTOOLS_ABOUTDEBUGGING_TIME_ACTIVE_SECONDS',
+        'devtools-about-debugging-time-active-chart',
+        {least_squares: false}); // don't show the trend line for now
     });
   });
 

@@ -12,6 +12,10 @@ function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
     colors: _.values(FIREFOX_RELEASES.colors)
   };
 
+  var DEFAULT_OPTIONS = {
+    sanitized: true
+  };
+
   function evolutionMap(channel, evolutions) {
     // map the data into the values we need
     // histogram, index, date
@@ -25,8 +29,9 @@ function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
   }
 
 return {
-  graph: function(metric, ID, chart = {}, options = { sanitized: true }) {
+  graph: function(metric, ID, chart = {}, options = {}) {
     chart = _.defaults(chart, CHART_DEFAULTS);
+    options = _.defaults(options, DEFAULT_OPTIONS);
 
     // draw initial empty chart
     DevToolsMetrics.line(ID, chart);
