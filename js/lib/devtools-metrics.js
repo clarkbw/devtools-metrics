@@ -46,6 +46,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
           size_accessor:'submissions',
           x_accessor: 'date',
           y_accessor: 'value',
+          legend_target: '#' + ID + '-legend',
           mouseover: function(d) {
             var format = d3.format(',');
             d3.select('#' + ID + ' svg .mg-active-datapoint')
