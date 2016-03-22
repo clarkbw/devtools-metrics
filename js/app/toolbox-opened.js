@@ -1,6 +1,6 @@
 /*global define*/
-define('app/toolbox-opened', ['moment', 'lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
-function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
+define('app/toolbox-opened', ['lodash', 'TelemetryPromises', 'DevToolsMetrics', 'LatestVersions', 'FIREFOX_RELEASES'],
+function(_, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
 
   var metric = 'DEVTOOLS_TOOLBOX_OPENED_BOOLEAN';
   var newMetric = 'DEVTOOLS_TOOLBOX_OPENED_COUNT';
@@ -15,6 +15,11 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
   };
 
   var options = { sanitized: true };
+  var markers = FIREFOX_RELEASES.beta;
+  markers.push({
+    date: new Date('2016-02-25'),
+    label: 'New Count Metric'
+  });
 
   var ID = 'devtools-toolbox-opened-chart';
   var chart = {
@@ -25,7 +30,8 @@ function(moment, _, T, DevToolsMetrics, LatestVersions, FIREFOX_RELEASES) {
     left: 60,
     legend: T.ALL_CHANNELS,
     colors: _.values(FIREFOX_RELEASES.colors),
-    legend_target: '#' + ID + '-legend'
+    legend_target: '#' + ID + '-legend',
+    markers: markers
   };
 
   function evolutionMap(channel, evolutions) {
