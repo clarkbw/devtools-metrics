@@ -12,7 +12,14 @@ title: DevTools Panels
 
     <div class="row">
       <div class="col-md-12 graph-header text-center">
-        <h4>DevTools Panels (Beta Channel Only)</h4>
+        <h4>DevTools Panels</h4>
+        <div class="btn-group btn-group-sm text-center channel-controls">
+          <button type="button" class="btn btn-default" data-y_accessor="release">Release</button>
+          <button type="button" class="btn btn-default active" data-y_accessor="beta">Beta</button>
+          <button type="button" class="btn btn-default" data-y_accessor="aurora">Aurora</button>
+          <button type="button" class="btn btn-default" data-y_accessor="nightly">Nightly</button>
+        </div>
+        <p><em>Loading other channels may take time, please be patient.</em></p>
       </div>
     </div>
 
@@ -22,10 +29,11 @@ title: DevTools Panels
         <div class="row">
           <div class="col-md-12 graph-body">
             <div id="devtools-toolbox-panels-opened-chart"></div>
+            <div id="devtools-toolbox-panels-opened-chart-progress"></div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 graph-legend">
+          <div class="col-md-12 graph-legend text-center">
             <div id="devtools-toolbox-panels-opened-chart-legend"></div>
           </div>
         </div>
@@ -34,10 +42,11 @@ title: DevTools Panels
         <div class="row">
           <div class="col-md-12 graph-body">
             <div id="devtools-toolbox-panels-time-active-chart"></div>
+            <div id="devtools-toolbox-panels-time-active-progress"></div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 graph-legend">
+          <div class="col-md-12 graph-legend text-center">
             <div id="devtools-toolbox-panels-time-active-chart-legend"></div>
           </div>
         </div>

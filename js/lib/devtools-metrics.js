@@ -21,7 +21,7 @@ function($, MG, moment, d3, _, FIREFOX_RELEASES) {
         }
         $progress.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%');
         if (percent === 100) {
-          $progress.fadeOut();
+          $progress.removeClass('progress').fadeOut(undefined, () => $(this).remove('.progress-bar').show());
         }
       });
     },
