@@ -44,20 +44,5 @@
       <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script>
-    // don't want to be responsible for serving this data to others
-    var FIREFOX_RELEASES = [
-      {% for release in site.data.firefox_releases.releases %}
-        {% if (release.end) %}
-        {
-          version: '{{ release.version }}',
-          date: '{{ release.date }}',
-          end: '{{ release.end }}'
-        },
-        {% endif %}
-      {% endfor %}
-    ];
-    </script>
-
   </head>
   <body>

@@ -1,4 +1,4 @@
-/*global requirejs, define, FIREFOX_RELEASES*/
+/*global requirejs, define*/
 requirejs.config({
     'paths': {
       // 'app': '../app',
@@ -9,7 +9,9 @@ requirejs.config({
       'MG': 'lib/metricsgraphics',
       'Telemetry': '//telemetry.mozilla.org/v2/telemetry',
       'TelemetryPromises': 'lib/telemetry-promises',
-      'DevToolsMetrics': 'lib/devtools-metrics'
+      'DevToolsMetrics': 'lib/devtools-metrics',
+      'text': 'lib/require/text',
+      'json': 'lib/require/json'
     },
     shim: {
       'Telemetry': {
@@ -71,16 +73,23 @@ define('DEVTOOLS_PANELS', [], function() {
   ];
 });
 
-define('FIREFOX_RELEASES', [], function() {
+define('FIREFOX_RELEASES',
+['json!https://crash-stats.mozilla.com/api/ProductVersions/?product=Firefox&build_type=release&start_date=%3E2013-12-31'],
+function({hits:data}) {
   var TOO_OLD = new Date('2013-12-31');
-  FIREFOX_RELEASES = FIREFOX_RELEASES.map(function(d) {
-    d['date'] = new Date(d['date']);
-    d['label'] = 'release ' + d['version'];
+  var FULL_RELEASE = /\.0$/g;
+  var FIREFOX_RELEASES = data
+  .filter((d) => (d.build_type == 'release' && d.version.match(FULL_RELEASE) !== null))
+  .map(function(d) {
+    d.date = new Date(d['start_date']);
+    d.version = parseInt(d.version.split('.')[0], 10);
+    d.label = 'release ' + d.version;
     return d;
   })
   .filter(function(d) {
       return d['date'] > TOO_OLD;
   });
+
   return {
     colors: {
       nightly: '#002147',
@@ -90,7 +99,7 @@ define('FIREFOX_RELEASES', [], function() {
     },
     release: FIREFOX_RELEASES,
     beta: FIREFOX_RELEASES.map((release) => {
-      var version = parseInt(release.version, 10) + 1;
+      var version = release.version + 1;
       return {
         version: version,
         date: release.date,
@@ -98,7 +107,7 @@ define('FIREFOX_RELEASES', [], function() {
       };
     }),
     aurora: FIREFOX_RELEASES.map((release) => {
-      var version = parseInt(release.version, 10) + 2;
+      var version = release.version + 2;
       return {
         version: version,
         date: release.date,
@@ -106,7 +115,7 @@ define('FIREFOX_RELEASES', [], function() {
       };
     }),
     nightly: FIREFOX_RELEASES.map((release) => {
-      var version = parseInt(release.version, 10) + 3;
+      var version = release.version + 3;
       return {
         version: version,
         date: release.date,

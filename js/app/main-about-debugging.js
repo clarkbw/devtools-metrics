@@ -34,6 +34,7 @@ function(moment, TelemetryPromises, FIREFOX_RELEASES) {
       tac.graph(
         'DEVTOOLS_ABOUTDEBUGGING_TIME_ACTIVE_SECONDS',
         'devtools-about-debugging-time-active-chart',
+        {markers: markers},
         {least_squares: false}); // don't show the trend line for now
     });
   });
