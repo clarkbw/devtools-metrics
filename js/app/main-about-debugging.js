@@ -13,6 +13,10 @@ function(moment, TelemetryPromises, FIREFOX_RELEASES) {
       date: new Date('2016-03-10'),
       label: 'Hacks Post [1]'
     });
+    markers.push({
+      date: new Date('2016-04-30'),
+      label: 'Hacks Post [2]'
+    });
 
     requirejs(['lib/telemetry/count', 'lib/telemetry/opened-per-user-flag'],
     function (tc, opu) {
