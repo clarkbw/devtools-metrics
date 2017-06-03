@@ -1,4 +1,6 @@
 # devtools-metrics
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/devtools-metrics.svg)](https://greenkeeper.io/)
 Public metrics for Firefox DevTools
 
 ## Information
